@@ -46,6 +46,7 @@ remove_files () {
     echo "#### REMOVE $remove_file from directories ####"
     rm /etc/nginx/sites-available/$remove_file
     rm /var/cache/certbot_tmp/$remove_file
+    rmdir /var/cache/certbot_tmp
 
     echo ""
     echo "#### Remove Completed ####"
