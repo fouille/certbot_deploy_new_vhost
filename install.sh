@@ -1,25 +1,25 @@
 #!/bin/bash
 
 install_template () {
-    echo "#### Set template ####"
+    echo "#### 1/5 Set template ####"
     mkdir /var/cache/certbot_tmp
     wget -q -O /var/cache/certbot_tmp/$domain https://raw.githubusercontent.com/fouille/certbot_deploy_new_vhost/main/template/certbot_template
     sed -i 's/domain/'$domain'/g' /var/cache/certbot_tmp/$domain
 
     echo ""
-    echo "#### Copy template to NGINX ####"
+    echo "#### 2/5 Copy template to NGINX ####"
     cp /var/cache/certbot_tmp/$domain /etc/nginx/sites-available/
 
     echo ""
-    echo "#### Activate Nginx Certbot vHost ####"
+    echo "#### 3/5 Activate Nginx Certbot vHost ####"
     ln -s /etc/nginx/sites-available/$domain /etc/nginx/sites-enabled/
 
     echo ""
-    echo "#### Reload NGinx ####"
+    echo "#### 4/5 Reload NGinx ####"
     systemctl reload nginx
 
     echo ""
-    echo "#### Run Certbot ####"
+    echo "#### 5/5 Run Certbot ####"
     certbot --redirect --nginx -d $domain
 }
 
@@ -38,12 +38,12 @@ certbot certonly --redirect --dry-run --nginx -d $domain
 }
 
 remove_files () {
-    echo "#### RUN $remove_file Remove"
+    echo "#### 1/3 RUN $remove_file Remove ####"
     echo ""
-    echo "#### UNLINK $remove_file from NGinx####"
+    echo "#### 2/3 UNLINK $remove_file from NGinx ####"
     unlink /etc/nginx/sites-enabled/$remove_file
 
-    echo "#### REMOVE $remove_file from directories ####"
+    echo "#### 3/3 REMOVE $remove_file from directories ####"
     rm /etc/nginx/sites-available/$remove_file
     rm /var/cache/certbot_tmp/$remove_file
     rmdir /var/cache/certbot_tmp
