@@ -3,7 +3,7 @@
 install_template () {
     echo "#### Set template ####"
     mkdir /var/cache/certbot_tmp
-    wget -q -O /var/cache/certbot_tmp/$domain https://raw.githubusercontent.com/fouille/certbot_deploy_new_vhost/main/temp$
+    wget -q -O /var/cache/certbot_tmp/$domain https://raw.githubusercontent.com/fouille/certbot_deploy_new_vhost/main/template/certbot_template
     sed -i 's/domain/'$domain'/g' /var/cache/certbot_tmp/$domain
 
     echo ""
