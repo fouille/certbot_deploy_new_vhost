@@ -78,7 +78,7 @@ while getopts ':t:d:c:r:' opt; do
             ;;
         c)
             domain=$OPTARG
-            run_certbot
+            run_certbot_manual
             ;;
         r)
             remove_file=$OPTARG
