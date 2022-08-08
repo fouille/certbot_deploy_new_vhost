@@ -5,3 +5,15 @@ server {
 
     root /var/www/html;
 }
+
+server {
+    listen 443 domain;
+    listen [::]:443 domain;
+    server_name domain;
+
+    access_log /var/log/nginx/wazo.access.log;
+    error_log /var/log/nginx/wazo.error.log;
+    root /var/www/html;
+
+    include /etc/nginx/locations/https-enabled/*;
+}
